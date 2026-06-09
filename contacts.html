@@ -7,6 +7,117 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        @media (max-width: 768px) {
+
+            header, .header {
+                height: auto !important;
+                min-height: unset !important;
+                position: relative !important;
+            }
+            .header-wrap {
+                display: grid !important;
+                grid-template-columns: auto 1fr;
+                grid-template-rows: auto auto;
+                gap: 16px 10px !important;
+                padding: 15px !important;
+                align-items: center !important;
+                height: auto !important;
+            }
+            .logo {
+                grid-column: 1 !important;
+                grid-row: 1 !important;
+                margin: 0 !important;
+                justify-self: start !important;
+            }
+            .logo-img {
+                max-height: 50px !important;
+                width: auto !important;
+            }
+            .header-nav-block {
+                display: contents !important;
+            }
+            .header-contacts {
+                grid-column: 2 !important;
+                grid-row: 1 !important;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: flex-end !important;
+                align-items: center !important;
+                gap: 15px !important;
+                width: 100% !important;
+            }
+            .phone-link {
+                font-size: 14px !important;
+                white-space: nowrap !important;
+            }
+            .lang-switcher {
+                display: flex !important;
+                gap: 4px !important;
+            }
+            .lang-btn {
+                padding: 4px 8px !important;
+                font-size: 13px !important;
+            }
+            .nav-links {
+                grid-column: 1 / -1 !important;
+                grid-row: 2 !important;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+                gap: 10px 20px !important;
+                padding: 10px 0 0 0 !important;
+                margin: 0 !important;
+                border-top: 1px solid #eee;
+                list-style: none !important;
+                width: 100% !important;
+            }
+
+            .contacts-page {
+                padding: 24px 15px !important;
+            }
+            .contacts-page h1 {
+                font-size: 26px !important;
+                margin-bottom: 8px !important;
+            }
+            .contacts-page .subtitle {
+                font-size: 14px !important;
+                margin-bottom: 24px !important;
+            }
+
+
+            .contacts-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+            .info-box, .map-box {
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            
+
+            .map-box iframe {
+                min-height: 320px !important;
+                height: 320px !important;
+            }
+
+
+            .footer-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 24px !important;
+                text-align: left !important;
+            }
+            .footer-about, .footer-requisites {
+                width: 100% !important;
+            }
+            .footer-bottom {
+                margin-top: 20px !important;
+                padding-top: 20px !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
