@@ -1,0 +1,1041 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, input, button, textarea, select {
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --primary-color: #006A8E;   
+    --primary-hover: #005572;  
+    --dark-bg: #0f172a;      
+    --light-bg: #f4f7fc;      
+    --text-main: #1e293b;     
+    --text-muted: #64748b;     
+    --border-color: #e2e8f0; 
+    
+    --primary-blue: #005572;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--text-main);
+    background-color: #F9FAF7;
+    line-height: 1.6;
+    font-size: 17px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.header {
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    height: 120px; /* Фиксируем общую высоту шапки, чтобы было пространство сверху */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 85, 114, 0.15);
+}
+
+.header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Выравнивает все внутренние блоки по нижнему краю */
+    width: 100%;
+    height: 100%; /* Растягиваем контейнер на всю высоту шапки */
+    padding-bottom: 8px; /* Аккуратный отступ от самого нижнего края для красоты */
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.logo-img {
+    height: 150px;
+    width: auto;  
+    display: block;
+    object-fit: contain;
+    margin: 0;
+    padding-top: 15px; 
+}
+
+.header-nav-block {
+    display: flex;
+    align-items: center;
+    gap: 40px; 
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 18px;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.25s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #005572;
+    border-radius: 2px;
+    transition: width 0.25s ease; /* Плавное появление линии */
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #005572;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.header-contacts {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.phone-link {
+    font-size: 20px;
+    font-weight: 700;
+    color: #005572;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+.phone-link:hover {
+    background-color: rgba(0, 85, 114, 0.05); 
+    transform: translateY(-1px); 
+}
+
+ .lang-switcher {
+    display: flex;
+    gap: 6px;
+    background: #005572; /* Темно-синий фон всей плашки */
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+.lang-btn {
+    background: none;
+    border: 1px solid transparent; /* Заготовка под границу активной кнопки */
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7); /* Цвет неактивного текста (слегка прозрачный белый) */
+    cursor: pointer;
+    border-radius: 7px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.lang-btn:hover {
+    color: #ffffff;
+}
+
+
+.lang-btn.active {
+    background: rgba(255, 255, 255, 0.15) !important; /* Полупрозрачный белый внутри синей плашки */
+    border-color: #005572 !important; /* Граница */
+    color: #ffffff !important; /* Белый текст */
+}
+
+
+
+.calc-section {
+    padding: 60px 0;
+}
+
+/* .calc-container {
+    background: var(--light-bg); 
+    gap: 30px; 
+    align-items: stretch;
+    width: 100%;
+    border-radius: 28px;
+    padding: 45px;
+    display: flex;
+    gap: 45px;
+    align-items: center;
+    border: 1px solid #e2e8f0; 
+    box-shadow: 0 40px 80px rgba(0, 106, 142, 0.1), 0 15px 35px rgba(0, 106, 142, 0.05);
+} */
+
+.calc-container {
+    background: var(--light-bg); 
+    width: 100%;
+    border-radius: 28px;
+    padding: 45px;
+    display: flex;
+    gap: 45px;
+    align-items: stretch; /* Растягивает обе части по высоте */
+    border: 1px solid #e2e8f0; 
+    box-shadow: 0 40px 80px rgba(0, 106, 142, 0.1), 0 15px 35px rgba(0, 106, 142, 0.05);
+    box-sizing: border-box;
+}
+
+
+.calc-num-input {
+    font-family: inherit;
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: #006A8E;    
+    border: none;
+    border-bottom: 2px dashed #cbd5e1; 
+    background: transparent;
+    padding: 2px 4px;
+    width: 120px;       
+    text-align: right;  
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+
+.calc-num-input:focus {
+    border-bottom-color: #006A8E; 
+    border-bottom-style: solid;
+}
+
+
+.calc-num-input::-webkit-outer-spin-button,
+.calc-num-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Прячем стрелочки в Firefox */
+.calc-num-input {
+    -moz-appearance: textfield;
+}
+
+
+.calc-inputs {
+    flex: 0 0 550px;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+/* .calc-inputs {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-sizing: border-box;
+} */
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Белые блоки для ползунков с выраженной рамкой и глубокой тенью */
+.input-inner-box {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -12px; /* Элегантное наложение слайдера на рамку */
+    position: relative;
+    z-index: 2;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.04), 0 5px 15px rgba(15, 23, 42, 0.02);
+}
+
+.input-label-text {
+    font-size: 24px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.currency {
+    font-size: 34px;
+    color: #000;
+    font-weight: 700;
+}
+
+.currency strong {
+    font-size: 38px;
+    color: var(--primary-color); /* Акцентный озерно-синий цвет для выбранных значений */
+    font-weight: 800;
+}
+
+input[type="range"].range-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: calc(100% - 50px);
+    margin: 0 auto;
+    height: 8px;
+    border-radius: 4px;
+    outline: none;
+    position: relative;
+    z-index: 3;
+    background: linear-gradient(to right, #006A8E 0%, #006A8E 50%, #cbd5e1 50%, #cbd5e1 100%);
+    cursor: pointer;
+}
+
+input[type="range"].range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    background: #006A8E;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 106, 142, 0.4);
+    transition: transform 0.1s, background-color 0.1s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+input[type="range"].range-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #006A8E;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 106, 142, 0.4);
+    transition: transform 0.1s;
+}
+
+input[type="range"].range-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+}
+
+.range-limits {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #94a3b8;
+    margin-top: 12px;
+    padding: 0 30px;
+    font-weight: 500;
+}
+
+.calc-result-card {
+    flex: 0 0 380px;
+    width: 380px;
+    height: 380px; 
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 40px 35px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 25px 50px rgba(15, 23, 42, 0.06), 0 10px 20px rgba(15, 23, 42, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.result-title {
+    color: #64748b;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 280px;
+    margin-bottom: 25px;
+}
+
+.btn-apply {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 280px;      
+    height: 60px;        
+    flex-shrink: 0;       
+    align-self: flex-start;
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 6px 20px rgba(0, 106, 142, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.result-price {
+    font-size: 52px;
+    font-weight: 800;
+    color: #0f172a;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 15px 0; /* Фиксированные отступы вокруг цены */
+    letter-spacing: -1px;
+    width: 100%;
+    line-height: 1.2; /* Фиксированная высота строки */
+}
+
+
+.btn-apply:hover {
+    background: var(--primary-hover);
+}
+
+.btn-apply:active {
+    transform: scale(0.98);
+}
+
+.info-section {
+    padding: 50px 0;
+}
+
+.info-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 35px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #ffffff;
+}
+
+.tab-btn-type {
+    background: none;
+    border: 2px solid transparent;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.tab-btn-type.active {
+    background-color: rgba(0, 85, 114, 0.1) !important; 
+    border-color: #005572 !important; 
+    color: #005572;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+
+}
+
+.info-card {
+    background: #f8fafc;
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 40px 80px rgba(0, 106, 142, 0.1), 0 15px 35px rgba(0, 106, 142, 0.05);
+}
+
+.info-card h3 {
+    font-size: 24px;
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+.check-list li {
+    margin-bottom: 16px;
+    position: relative;
+    padding-left: 32px;
+    font-size: 17px;
+    color: #334155;
+}
+
+.check-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    color: var(--primary-color);
+    font-weight: 900;
+    font-size: 20px;
+}
+
+/* СЕКЦИЯ ДОКУМЕНТОВ */
+.docs-section {
+    padding: 70px 0;
+}
+
+.docs-section h2 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 18px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+.docs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.doc-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.doc-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 30px rgba(0, 106, 142, 0.1);
+}
+
+.doc-icon {
+    font-size: 36px;
+    background: #f1f5f9;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+}
+
+.doc-info h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.doc-info span {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* СТРАНИЦА КОНТАКТОВ (CONTACTS.HTML) */
+.contacts-page {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 24px;
+}
+
+.contacts-page h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.contacts-page .subtitle {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 50px;
+}
+
+.contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+.contact-item i {
+    font-size: 1.8rem;
+    color: var(--primary-color); 
+    margin-right: 20px;
+    margin-top: 4px;
+}
+
+.contact-item .label {
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.contact-item .value {
+    font-size: 1.4rem;
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.social-block {
+    margin-top: 50px;
+}
+
+.social-block h3 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.8rem;
+}
+
+/* Брендовые цвета соцсетей */
+.social-link.whatsapp { background-color: #25d366; }
+.social-link.instagram { background-color: #e1306c; }
+.social-link.telegram { background-color: #0088cc; }
+
+.map-box {
+    box-shadow: 0 10px 30px rgba(15,23,42,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 500px;
+}
+
+/* СТИЛЬНЫЙ ПОДВАЛ (FOOTER) */
+.footer {
+    background: var(--dark-bg);
+    color: #94a3b8;
+    padding: 70px 0 40px 0;
+    font-size: 16px;
+    border-top: 5px solid var(--primary-color);
+    margin-top: 80px;
+}
+
+.white-logo { 
+    color: #ffffff; 
+    margin-bottom: 20px; 
+    font-size: 28px;
+}
+
+.logo-img-footer {
+    height: 45px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 50px;
+}
+
+.footer-about p { margin-bottom: 12px; color: #cbd5e1; }
+.footer-requisites h4 { color: white; margin-bottom: 20px; font-size: 18px; }
+.footer-requisites p { margin-bottom: 10px; }
+.footer-requisites span { color: #cbd5e1; }
+
+.footer-bottom {
+    padding-top: 40px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.footer-bottom p {
+    margin-bottom: 12px;
+}
+
+
+@media (max-width: 992px) {
+    .header-wrap { flex-direction: column; gap: 20px; text-align: center; }
+    .header-nav-block { flex-direction: column; gap: 20px; }
+    .calc-container { flex-direction: column; padding: 30px; gap: 35px; }
+    .calc-inputs { width: 100%; }
+    .input-inner-box { padding: 20px; }
+    .currency { font-size: 28px; }
+    .currency strong { font-size: 30px; }
+    .calc-result-card { width: 100%; padding: 45px 25px; min-height: auto; }
+    .result-price { font-size: 48px; margin-bottom: 30px; }
+    .info-grid, .docs-grid, .footer-grid, .contacts-grid { grid-template-columns: 1fr; gap: 30px; }
+    .map-box { height: 400px; }
+}
+
+
+
+
+
+
+
+/* ПОЛНАЯ ШИРИНА И ВЫРАВНИВАНИЕ ПО ЦЕНТРУ */
+.features-section {
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 100%;
+}
+
+.feature-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Общий контейнер-карточка */
+.feature-image-box {
+    position: relative; /* Чтобы позиционировать текст поверх картинки */
+    width: 100%;
+    max-width: 1000px;
+    height: 480px;
+    background: var(--primary-color); /* Бирюзовый фон, в который уходит картинка */
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 106, 142, 0.12);
+    
+    /* Анимация появления */
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+}
+
+/* Эффект плавного исчезновения картинки к низу */
+.feature-image-box img.fade-bottom {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    
+    /* Магия градиентного скрытия: сверху 100% видимости, к низу (начиная с 40%) уходит в ноль */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+}
+
+/* Контейнер для текста внутри карточки */
+.feature-text-inside {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    color: #ffffff; /* Белый текст шикарно смотрится на бирюзовом фоне */
+    z-index: 2;
+}
+
+.feature-text-inside h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.feature-text-inside p {
+    font-size: 16px;
+    line-height: 1.5;
+    opacity: 0.9;
+    max-width: 800px; /* Чтобы текст не растягивался колбасой на всю ширину */
+}
+
+/* НАСТРОЙКИ АНИМАЦИИ */
+.feature-row.left .feature-image-box { transform: translateX(-80px); }
+.feature-row.right .feature-image-box { transform: translateX(80px); }
+
+.feature-row.active .feature-image-box {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
+@media (max-width: 768px) {
+    .feature-image-box {
+        height: 380px; /* Чуть уменьшаем высоту карточки */
+        transform: translateY(40px) !important;
+    }
+    .feature-text-inside {
+        padding: 20px;
+    }
+    .feature-text-inside h3 {
+        font-size: 20px;
+    }
+    .feature-text-inside p {
+        font-size: 14px;
+    }
+}
+
+
+
+
+/* реклама */
+/* ==========================================================================
+   СЕТКА БАННЕРОВ (HERO SERVICES GRID)
+   ========================================================================== */
+
+.services-hero {
+    background-color: #F9FAF7;
+    padding: 40px 0 60px 0;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 140px 140px 140px; 
+    gap: 20px;
+}
+
+
+.service-card {
+    position: relative;
+    border-radius: 24px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Контент внутри карточек */
+.card-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-title {
+    color: #ffffff;
+    font-size:45px;
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 350px;
+}
+
+.card-amount {
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+/* Белые скругленные кнопки */
+.card-btn {
+    display: inline-block;
+    background: #ffffff;
+    padding: 12px 28px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: auto;
+}
+
+
+.card-link {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: underline;
+    margin-top: auto;
+}
+
+.card-slogan {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: auto;
+}
+
+
+
+/* ЦВЕТОВЫЕ ГРАДИЕНТЫ  */
+
+.card-main-blue {
+    background: linear-gradient(180deg, #006A8E 0%, #005572 100%);
+    grid-column: 1 / 3;
+    grid-row: 1 / 3; 
+    box-shadow:
+    0 12px 30px rgba(0, 106, 142, 0.18),
+    0 4px 12px rgba(0, 85, 114, 0.12);
+}
+.btn-blue-text { color: #005572; }
+
+.card-vertical-red {
+    background: linear-gradient(180deg, #005572 0%, #00445C 100%);
+    grid-column: 3 / 4;
+    grid-row: 1 / 4; 
+    box-shadow:
+    0 12px 30px rgba(0, 85, 114, 0.18),
+    0 4px 12px rgba(0, 68, 92, 0.12);
+}
+.btn-red-text { color: #ef4444; }
+
+.card-small-green {
+    background: linear-gradient(180deg, #007A9E 0%, #006A8E 100%);
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    padding: 24px 30px;
+    box-shadow:
+    0 12px 30px rgba(29, 137, 173, 0.18),
+    0 4px 12px rgba(0, 106, 142, 0.12);
+}
+.card-small-green .card-title { font-size: 22px; }
+.card-small-green .card-amount { font-size: 24px; margin: 0; }
+
+.card-small-orange {
+    background: linear-gradient(180deg, #0086B3 0%, #006A8E 100%);
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    padding: 24px 30px;
+    box-shadow:
+    0 12px 30px rgba(75, 167, 197, 0.18),
+    0 4px 12px rgba(29, 137, 173, 0.12);
+}
+.card-small-orange .card-title { font-size: 22px; }
+
+.card-bg-pattern {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ (МЕДИА-ЗАПРОСЫ)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto;
+    }
+
+    .card-vertical-red {
+        grid-column: auto;
+        grid-row: auto; 
+    }
+}
+
+
+@media (max-width: 576px) {
+    .services-hero {
+        padding: 20px 0 40px 0; 
+    }
+
+    .services-grid {
+        gap: 12px; 
+    }
+
+    .service-card {
+        padding: 24px;
+        min-height: 200px;
+    }
+
+    .card-title {
+        font-size: 20px;
+        max-width: 100%;
+    }
+
+    .card-amount {
+        font-size: 26px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+
+    .card-small-green, 
+    .card-small-orange {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .card-small-green .card-title,
+    .card-small-orange .card-title {
+        font-size: 20px;
+    }
+
+    .card-small-green .card-amount {
+        font-size: 24px;
+    }
+
+    .card-btn {
+        width: 100%; 
+        text-align: center;
+        padding: 14px;
+    }
+}

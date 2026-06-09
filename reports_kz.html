@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Қаржылық есептілік — Кредит-Регион</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="app.js" defer></script>
+    <style>
+        .reports-section { padding: 40px 0; }
+        .table-container { 
+            overflow-x: auto; 
+            margin-top: 30px; 
+            background: #fff; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        .reports-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        .reports-table th, .reports-table td { padding: 16px; text-align: left; border-bottom: 1px solid #eee; }
+        .reports-table th { background-color: #f8fafc; color: #475569; font-weight: 600; }
+        .download-link { color: #2563eb; text-decoration: none; font-weight: bold; padding: 6px 12px; background: #eff6ff; border-radius: 6px; }
+        .download-link:hover { background: #dbeafe; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-wrap">
+            <a href="index.html" class="logo">
+                <img src="https://avirgehlkrsgrkzicobc.supabase.co/storage/v1/object/public/img/logo%20(2).png" alt="Кредит-Регион" class="logo-img">
+            </a>
+            <div class="header-nav-block">
+                <ul class="nav-links">
+                    <li><a href="index.html" id="nav-main">Басты бет</a></li>
+                    <li><a href="reports_kz.html" class="active" id="nav-about">Есептіліктер</a></li>
+                    <li><a href="contacts.html" id="nav-contacts">Байланыс</a></li>
+                </ul>   
+                
+                <div class="header-contacts">
+                    <a href="tel:+77212425773" class="phone-link">+7 (7212) 42-57-73</a>
+                    <div class="lang-switcher">
+                        <button class="lang-btn active" id="lang-kz-btn">KZ</button>
+                        <button class="lang-btn" id="lang-ru-btn" onclick="switchReportLang('ru')">RU</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="reports-section">
+            <h1>Қаржылық есептілік</h1>
+            <p>«Кредит-Регион» МҚҰ ЖШС-нің қаржылық есептерінің тарихы</p>
+            
+            <div class="table-container">
+                <table class="reports-table">
+                    <thead>
+                        <tr>
+                            <th>Есептің атауы</th>
+                            <th>Құрылды</th>
+                            <th>Өзгертілді</th>
+                            <th>Құжат</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reports-tbody">
+                        <tr>
+                            <td colspan="4" style="text-align:center;">Деректер жүктелуде...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (typeof supabase === 'undefined' || typeof _supabase === 'undefined') {
+            console.error("Supabase не найден. Проверь подключение app.js");
+            return;
+        }
+
+        const tbody = document.getElementById('reports-tbody');
+        if (!tbody) return;
+
+        try {
+            const { data: reports, error } = await _supabase
+                .from('report_announcements')
+                .select('title_kz, created_at, updated_at, file_url')
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            if (!reports || reports.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Есептер табылмады.</td></tr>`;
+                return;
+            }
+
+        tbody.innerHTML = reports.map(r => `
+            <tr>
+                <td><strong>${r.title_kz}</strong></td> 
+                <td>${new Date(r.created_at).toLocaleDateString('kk-KZ')}</td>
+                <td>${new Date(r.updated_at).toLocaleDateString('kk-KZ')}</td>
+                <td><a href="${r.file_url}" target="_blank" class="download-link">Қараңыз</a></td>
+            </tr>
+        `).join('');
+        } catch (err) {
+            tbody.innerHTML = `<tr><td colspan="4">Қате: ${err.message}</td></tr>`;
+        }
+    });
+
+    function switchReportLang(lang) {
+        if (lang === 'ru') {
+            window.location.href = 'reports.html';
+        }
+    }
+</script>
+</body>
+</html>

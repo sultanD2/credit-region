@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МФО Кредит-Регион — Микрокредиты в Караганде</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<style>
+    .slider {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 40px 0;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 40px;
+
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.8),
+        rgba(0,0,0,0.4),
+        transparent
+    );
+
+    color: white;
+}
+
+.overlay h2 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.overlay p {
+    margin-top: 10px;
+    font-size: 16px;
+    max-width: 600px;
+}
+
+.ad {
+    font-family: inter;
+    font-size: 25px;
+}
+
+
+
+
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal-content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    text-align: center;
+    font-family: sans-serif;
+    animation: fadeInModal 0.3s ease;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+.close-modal-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.2s;
+}
+.close-modal-btn:hover {
+    color: #fff;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+
+#modal-name-input, #modal-phone-input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 2px solid #444;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 15px; 
+}
+
+#modal-name-input:focus, #modal-phone-input:focus {
+    border-color: #007bff;
+}
+
+#modal-phone-input {
+    margin-bottom: 25px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.modal-buttons button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+    transition: background-color 0.2s;
+}
+
+
+.btn-confirm {
+    background-color: #007bff;
+    color: white;
+}
+.btn-confirm:hover {
+    background-color: #0056b3;
+}
+
+
+.btn-cancel {
+    background-color: #3a3a3a;
+    color: #fff;
+}
+.btn-cancel:hover {
+    background-color: #555;
+}
+
+.btn-apply {
+    margin-bottom: 12px;
+}
+.info-section {
+    width: 100%;
+}
+
+.info-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;          
+    margin-bottom: 25px;
+}
+</style>
+<body>
+    <header class="header">
+        <div class="container header-wrap">
+            <a href="index.html" class="logo">
+                <img src="https://avirgehlkrsgrkzicobc.supabase.co/storage/v1/object/public/img/logo%20(2).png" alt="Кредит-Регион" class="logo-img">
+            </a>
+            <div class="header-nav-block">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active" id="nav-main">Главная</a></li>
+                    <li><a href="reports.html" id="nav-about">Отчеты</a></li>
+                    <li><a href="contacts.html" id="nav-contacts">Контакты</a></li>
+                </ul>   
+                
+                <div class="header-contacts">
+                    <a href="tel:+77212425773" id="phone-1" class="phone-link">+7 (7212) 42-57-73</a>
+                    <div class="lang-switcher">
+                        <button class="lang-btn" id="lang-kz-btn" onclick="changeLang('kz')">KZ</button>
+                        <button class="lang-btn active" id="lang-ru-btn" onclick="changeLang('ru')">RU</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="services-hero">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card card-main-blue">
+                    <div class="card-content">
+                        <div>
+                            <h2 class="card-title" id="hero-main-title">Кредит-регион</h2>
+                            <p class="card-slogan" id="hero-main-slogan">Быстрый старт для бизнеса, легкое решение для семьи</p>
+                        </div>
+                        <p class="card-amount price" id="hero-main-amount">до 90 000 000 ₸</p>
+                        <a href="#calculator" class="card-btn btn-blue-text" id="hero-main-btn">Получить деньги!</a>
+                    </div>
+                    <div class="card-bg-pattern"></div>
+                </div>
+
+                <div class="service-card card-vertical-red">
+                    <div class="card-content">
+                        <div>
+                            <h2 class="card-title" id="hero-about-title">О нас</h2>
+                            <p class="card-slogan" id="hero-about-desc">За годы своего развития ТОО «МФО «Кредит-регион» успешно использовал свой economic и управленческий потенциал для обеспечения стабильного роста финансовых показателей, создания устойчивой деловой репутации у клиентов и деловых партнеров и укрепления конкурентоспособности на ранке микрофинансирования.</p>
+                        </div>
+                        <p class="card-slogan" id="hero-about-slogan">Финансовая помощь, которой можно доверять</p>
+                    </div>
+                    <div class="card-bg-pattern"></div>
+                </div>
+
+                <div class="service-card card-small-green">
+                    <div class="card-content">
+                        <div>
+                            <h2 class="card-title" id="hero-business-title">Деньги для бизнеса</h2>
+                            <p class="card-slogan" id="hero-business-slogan">Надежный партнер в трудную минуту</p>
+                        </div>
+                        <p class="card-amount" id="hero-business-feedback">Быстрая обратная связь</p>
+                    </div>
+                </div>
+
+                <div class="service-card card-small-orange">
+                    <div class="card-content">
+                        <div>
+                            <h2 class="card-title" id="hero-any-title">Микрокредит на любые цели</h2>
+                            <p class="card-slogan" id="hero-any-slogan">Займы для всех, кто в них нуждается</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+    <div class="slider">
+    <div class="slide active">
+        <img src="https://avirgehlkrsgrkzicobc.supabase.co/storage/v1/object/public/img/hand.jpg" alt="">
+        <div class="overlay">
+            <h2>Надёжное партнёрство</h2>
+            <p class="ad">Прозрачные условия и решения, которым можно доверять.</p>
+        </div>
+    </div>
+        <div class="slide">
+            <img src="https://avirgehlkrsgrkzicobc.supabase.co/storage/v1/object/public/img/car4.jpg" alt="">
+            <div class="overlay">
+                <h2>Поддержка и забота</h2>
+                <p class="ad">Мы рядом на каждом этапе и готовы помочь в любой ситуации.</p>
+            </div>
+        </div>
+
+            <div class="slide">
+            <img src="https://avirgehlkrsgrkzicobc.supabase.co/storage/v1/object/public/img/house6.jpg" alt="">
+            <div class="overlay">
+                <h2>Уверенность в будущем</h2>
+                <p class="ad">Помогаем создавать стабильность и финансовый комфорт.</p>
+            </div>
+        </div>
+
+    </div>
+        <section id="calculator" class="calc-section">
+            <div class="calc-container">
+                <div class="calc-inputs">
+                    <h2 id="calc-title">Рассчитайте свой кредит</h2>
+                    <div class="input-group">
+                        <div class="input-labels">
+                            <span id="calc-label-amount">Сумма кредита</span>
+                            <span class="currency">
+                                <input type="number" id="amount-input" class="calc-num-input" value="0"> ₸
+                            </span>
+                        </div>
+                        <input type="range" class="range-slider" id="amount-slider">
+                        <div class="range-limits">
+                            <span id="amount-min-lbl">0 ₸</span>
+                            <span id="amount-max-lbl">0 ₸</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-labels">
+                            <span id="calc-label-term">Срок кредитования</span>
+                            <span class="currency">
+                                <input type="number" id="term-input" class="calc-num-input" value="0">
+                                <span id="term-unit">мес.</span>
+                            </span>
+                        </div>
+                        <input type="range" class="range-slider" id="term-slider">
+                        <div class="range-limits">
+                            <span id="term-min-lbl">0 мес.</span>
+                            <span id="term-max-lbl">0 мес.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="calc-result">
+                    <!-- <div class="result-item">
+                        <h3 id="calc-label-result">Ежемесячный платеж:</h3>
+                        <div class="result-price"><span id="monthly-payment">0</span> ₸</div>
+                    </div> -->
+                    <div class="result-item" style="margin-bottom: 20px;">
+                        <h3 id="calc-label-result" style="font-size: 16px; color: #ccc; margin-bottom: 12px;">Ежемесячный платеж:</h3>
+                        
+                        <div class="payment-range-box" style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 6px;">
+                                <span style="font-size: 14px; color: #aaa;">Минимальный (от):</span>
+                                <span style="font-size: 22px; font-weight: 700; color: #000;"><span id="monthly-payment-min">0</span> ₸</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 2px;">
+                                <span style="font-size: 14px; color: #aaa;">Максимальный (до):</span>
+                                <span style="font-size: 22px; font-weight: 700; color: #000;"><span id="monthly-payment-max">0</span> ₸</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-info-rows">
+                        <button class="btn-apply" id="open-modal-btn">Оставить заявку</button>
+                        <div class="info-row">
+                            <span></span>
+                            <span class="green-text"></span>
+                        </div>
+                        <div class="info-row">
+                            <span id="calc-label-rate">ГЭСВ:</span>
+                            <span id="calc-rate-lbl" class="weight-600">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-tabs">
+                <button class="tab-btn active tab-btn-type" id="tab-fiz" onclick="switchTab('fiz')">Физическим лицам</button>
+                <button class="tab-btn tab-btn-type" id="tab-yur" onclick="switchTab('yur')">Юридическим лицам</button>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 id="info-req-title">Требования к заемщику</h3>
+                    <ul id="requirements-list" class="check-list">
+                        <li id="req-loading">Загрузка данных...</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3 id="info-docs-title">Необходимые документы</h3>
+                    <ul id="documents-list" class="check-list">
+                        <li id="docs-loading">Загрузка данных...</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+                <section class="docs-section">
+            <h2 id="docs-section-title">Официальные документы организации</h2>
+            <p class="section-subtitle" id="docs-section-subtitle">В соответствии с законодательством РК вся деятельность МФО прозрачна</p>
+            <div class="docs-grid" id="dynamic-docs-container"></div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="white-logo">
+                    </div>
+                    <p id="mfo-hours">Режим работы: Пн-Пт с 9:00 до 18:00</p>
+                    <p id="mfo-address">Адрес: г. Караганда, ул. Костенко, д. 6, офис 61</p>
+                </div>
+                <div class="footer-requisites">
+                    <h4 id="footer-req-title">Реквизиты компании:</h4>
+                    <p><span id="footer-bin-label">БИН:</span> <span id="mfo-bin">051240002391</span></p>
+                    <p><span id="footer-iik-label">ИИК:</span> <span id="mfo-iik">KZ698560000003055609</span></p>
+                    <p><span id="footer-bik-label">БИК:</span> <span id="mfo-bik">KCJBKZKX</span></p>
+                    <p id="mfo-bank">АО «БанкЦентрКредит»</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p id="mfo-order">Условия предоставления микрокредитов утверждены приказом № 12-П от 15.01.2026 г.</p>
+                <p id="mfo-license">Лицензия на осуществление микрофинансовой деятельности № 09.21.0014.M от 29.03.2021 года, выданная Управлением региональных представителей в г. Караганда Агентства РК по регулированию и развитию финансовых рынков.</p>
+                <p id="footer-copyright">&copy; 2026 ТОО МФО «Кредит-Регион». Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    const slides = document.querySelectorAll(".slide");
+
+    let current = 0;
+
+    setInterval(() => {
+        slides[current].classList.remove("active");
+        current++;
+        if (current >= slides.length) {
+            current = 0;
+        }
+    slides[current].classList.add("active");
+
+}, 5000);
+    </script>
+    <div id="phone-modal" class="custom-modal">
+        <div class="modal-content">
+            <span class="close-modal-btn">&times;</span>
+            <h2>Оформление заявки</h2>
+            <p>Заполните данные для связи с вами:</p>
+            
+            <div class="input-wrapper">
+                <input type="text" id="modal-name-input" placeholder="Ваше имя" autocomplete="off">
+            </div>
+            
+            <div class="input-wrapper">
+                <input type="tel" id="modal-phone-input" placeholder="+7 (7XX) XXX-XX-XX" autocomplete="off">
+            </div>
+            
+            <div class="modal-buttons">
+                <button id="confirm-submit-btn" class="btn-confirm">OK</button>
+                <button id="cancel-submit-btn" class="btn-cancel">Отмена</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
