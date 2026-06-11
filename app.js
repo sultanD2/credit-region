@@ -458,7 +458,7 @@ function changeLang(lang) {
         if (termUnit) termUnit.textContent = 'ай';
         if (calcLabelResult) calcLabelResult.textContent = 'Ай сайынғы төлем:';
         if (openModalBtn) openModalBtn.textContent = 'Өтініш қалдырыңыз';
-        if (calcLabelRate) calcLabelRate.textContent = 'ЖТСМ:';
+        if (calcLabelRate) calcLabelRate.textContent = 'ЖТСМ 22%-дан бастап';
         if (tabFiz) tabFiz.textContent = 'Жеке тұлғаларға';
         if (tabYur) tabYur.textContent = 'Заңды тұлғаларға';
         if (infoReqTitle) infoReqTitle.textContent = 'Қарыз алушыға қойылатын талаптар';
@@ -517,7 +517,7 @@ function changeLang(lang) {
         if (termUnit) termUnit.textContent = 'мес.';
         if (calcLabelResult) calcLabelResult.textContent = 'Ежемесячный платеж:';
         if (openModalBtn) openModalBtn.textContent = 'Оставить заявку';
-        if (calcLabelRate) calcLabelRate.textContent = 'ГЭСВ:';
+        if (calcLabelRate) calcLabelRate.textContent = 'ГЭСВ от 22%';
         if (tabFiz) tabFiz.textContent = 'Физическим лицам';
         if (tabYur) tabYur.textContent = 'Юридическим лицам';
         if (infoReqTitle) infoReqTitle.textContent = 'Требования к заемщику';
