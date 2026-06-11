@@ -1132,7 +1132,7 @@ input[type="range"].range-slider::-moz-range-thumb:hover {
         padding: 0 10px !important;
     }
 
-    .card-vertical-red, 
+    .card-small-green, 
     .card-small-orange {
         display: none !important;
     }
