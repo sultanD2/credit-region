@@ -24,6 +24,7 @@ const calcRateLbl = document.getElementById('calc-rate-lbl');
 const monthlyPaymentMin = document.getElementById('monthly-payment-min');
 const monthlyPaymentMax = document.getElementById('monthly-payment-max');
 
+
 const bannerTranslations = {
     ru: {
         mainTitle: "Кредит-регион",
@@ -156,6 +157,11 @@ async function loadMfoSettings() {
         document.getElementById('mfo-bank').innerText = data[`bank_name_${currentLang}`] || data.bank_name;
     }
 
+    if (document.getElementById('calc-label-rate')) {
+        const value = data[`GESB${currentLang}`] || data.GESB;
+        document.getElementById('calc-label-rate').innerText = `${value}%`;
+    }
+
     const formattedDate = new Date(data.order_date).toLocaleDateString(currentLang === 'ru' ? 'ru-RU' : 'kk-KZ');
     
     const orderNode = document.getElementById('mfo-order');
@@ -217,6 +223,12 @@ function updatePageData() {
         }
     }
 
+    const rate = document.getElementById('rate')
+
+    if(rate) {
+        rate.innerText = `${currentProduct.rate_max}% годовых`;
+    }
+
     const termMinLbl = document.getElementById('term-min-lbl');
     const termMaxLbl = document.getElementById('term-max-lbl');
     if (termMinLbl && termSlider) termMinLbl.innerText = `${termSlider.min} ${suffix}`;
@@ -230,6 +242,7 @@ function updatePageData() {
     const termUnitNode = document.getElementById('term-unit');
     if (termUnitNode) termUnitNode.innerText = suffix;
 
+    
     calculateValues();
     if (amountSlider) updateSliderProgress(amountSlider);
     if (termSlider) updateSliderProgress(termSlider);
@@ -283,7 +296,7 @@ function calculateValues() {
     const amount = amountInput ? (parseInt(amountInput.value) || 0) : parseInt(amountSlider.value);
     const months = termInput ? (parseInt(termInput.value) || 1) : parseInt(termSlider.value);
 
-    // Используем твои переменные для вывода
+
     const minEl = monthlyPaymentMin || document.getElementById('monthly-payment-min');
     const maxEl = monthlyPaymentMax || document.getElementById('monthly-payment-max');
 
@@ -315,41 +328,6 @@ function calculateValues() {
     if (minEl) minEl.innerText = Math.round(minPayment).toLocaleString('ru-RU');
     if (maxEl) maxEl.innerText = Math.round(maxPayment).toLocaleString('ru-RU');
 }
-
-// function calculateValues() {
-//     if (!amountSlider || !termSlider) return;
-
-//     const amount = amountInput ? (parseInt(amountInput.value) || 0) : parseInt(amountSlider.value);
-//     const months = termInput ? (parseInt(termInput.value) || 1) : parseInt(termSlider.value);
-
-//     const minEl = monthlyPaymentMin || document.getElementById('monthly-payment-min');
-//     const maxEl = monthlyPaymentMax || document.getElementById('monthly-payment-max');
-
-//     const totalTermRange = parseInt(termSlider.max) - parseInt(termSlider.min);
-//     let calculatedRate = currentMaxRate;
-
-//     if (totalTermRange > 0) {
-//         const currentTermProgress = (months - parseInt(termSlider.min)) / totalTermRange;
-//         calculatedRate = currentMaxRate - (currentMaxRate - currentMinRate) * currentTermProgress;
-//     }
-
-//     if (calculatedRate < currentMinRate) calculatedRate = currentMinRate;
-//     if (calculatedRate > currentMaxRate) calculatedRate = currentMaxRate;
-
-//     if (calcRateLbl) calcRateLbl.innerText = `${calculatedRate.toFixed(1)}%`;
-
-//     const monthlyRate = (calculatedRate / 100) / 12;
-//     let monthlyPayment = 0;
-
-//     if (monthlyRate === 0) {
-//         monthlyPayment = amount / months;
-//     } else {
-//         monthlyPayment = amount * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
-//     }
-
-//     if (monthlyPaymentLbl) monthlyPaymentLbl.innerText = Math.round(monthlyPayment).toLocaleString('ru-RU');
-// }
-
 
 function changeLang(lang) {
     if (currentLang === lang) return;
@@ -406,7 +384,6 @@ function changeLang(lang) {
     const reqLoading = document.getElementById('req-loading');
     const docsLoading = document.getElementById('docs-loading');
 
-    // --- ПЕРЕМЕННЫЕ ДЛЯ ДОКУМЕНТОВ ---
     const docsSectionTitle = document.getElementById('docs-section-title');
     const docsSectionSubtitle = document.getElementById('docs-section-subtitle');
     const docRulesTitle = document.getElementById('doc-rules-title');
@@ -414,7 +391,6 @@ function changeLang(lang) {
     const docLicenseTitle = document.getElementById('doc-license-title');
     const docLicenseAction = document.getElementById('doc-license-action');
 
-    // --- ПЕРЕМЕННЫЕ ДЛЯ ФУТЕРА ---
     const mfoHours = document.getElementById('mfo-hours');
     const mfoAddress = document.getElementById('mfo-address');
     const footerReqTitle = document.getElementById('footer-req-title');
@@ -633,7 +609,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTerm = "";
 
     document.getElementById("open-modal-btn")?.addEventListener("click", () => {
-        // Считываем значения из калькулятора
         currentAmount = document.getElementById("amount-input").value;
         currentTerm = document.getElementById("term-input").value;
 
@@ -657,7 +632,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = nameInput.value.trim();
         const phone = phoneInput.value.trim();
 
-        // Проверка заполнения полей
         if (!name) {
             alert("Пожалуйста, введите ваше имя.");
             return;
