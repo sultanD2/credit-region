@@ -25,6 +25,7 @@ const monthlyPaymentMin = document.getElementById('monthly-payment-min');
 const monthlyPaymentMax = document.getElementById('monthly-payment-max');
 
 
+
 const bannerTranslations = {
     ru: {
         mainTitle: "Кредит-регион",
@@ -600,6 +601,8 @@ async function loadDynamicDocuments() {
 //заявка
 document.addEventListener('DOMContentLoaded', () => {
     loadDynamicDocuments();
+
+
     
     const modal = document.getElementById("phone-modal");
     const closeBtn = document.querySelector(".close-modal-btn");
@@ -608,6 +611,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById("modal-name-input");
     const phoneInput = document.getElementById("modal-phone-input");
 
+    const consentCheckbox = document.getElementById("consent-checkbox");
+
+    confirmBtn.disabled = true;
+
+    consentCheckbox.addEventListener("change", () => {
+    confirmBtn.disabled = !consentCheckbox.checked;
+    });
+    
     let currentAmount = "";
     let currentTerm = "";
 
@@ -617,6 +628,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         nameInput.value = "";
         phoneInput.value = "";
+        consentCheckbox.checked = false;
+        confirmBtn.disabled = true;
         modal.style.display = "flex";
     });
     const closeModal = () => {
@@ -642,6 +655,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!phone) {
             alert("Пожалуйста, введите номер телефона.");
             return;
+        }
+        if (!consentCheckbox.checked) {
+        alert("Необходимо согласиться на обработку персональных данных.");
+        return;
         }
 
         const templateParams = {
