@@ -393,6 +393,7 @@ function changeLang(lang) {
 
     const mfoHours = document.getElementById('mfo-hours');
     const mfoAddress = document.getElementById('mfo-address');
+    const mfoEmail = document.getElementById('mfo-email')
     const footerReqTitle = document.getElementById('footer-req-title');
     const footerBinLabel = document.getElementById('footer-bin-label');
     const footerIikLabel = document.getElementById('footer-iik-label');
@@ -452,6 +453,7 @@ function changeLang(lang) {
 
         if (mfoHours) mfoHours.textContent = 'Жұмыс режимі: Дс-Жм 9:00-ден 18:00-ге дейін';
         if (mfoAddress) mfoAddress.textContent = 'Мекенжайы: Қарағанды қ., Костенко көш., 6 үй, 61 кеңсе';
+        if (mfoEmail) mfoEmail.textContent = 'Электрондық пошта: mfo_kredit_region@mail.ru'
         if (footerReqTitle) footerReqTitle.textContent = 'Компанияның деректемелері:';
         if (footerBinLabel) footerBinLabel.textContent = 'БСН:';
         if (footerIikLabel) footerIikLabel.textContent = 'ЖБН:';
@@ -510,6 +512,7 @@ function changeLang(lang) {
 
         if (mfoHours) mfoHours.textContent = 'Режим работы: Пн-Пт с 9:00 до 18:00';
         if (mfoAddress) mfoAddress.textContent = 'Адрес: г. Караганда, ул. Костенко, д. 6, офис 61';
+        if (mfoEmail) mfoEmail.textContent = 'Электронная почта: mfo_kredit_region@mail.ru';
         if (footerReqTitle) footerReqTitle.textContent = 'Реквизиты компании:';
         if (footerBinLabel) footerBinLabel.textContent = 'БИН:';
         if (footerIikLabel) footerIikLabel.textContent = 'ИИК:';

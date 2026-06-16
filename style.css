@@ -66,6 +66,7 @@ body {
     border-left: 1px solid #d1d1d1;
     padding-left: 15px;
     white-space: nowrap; 
+
 }
 
 @media (max-width: 768px) {
@@ -1066,6 +1067,7 @@ input[type="range"].range-slider::-moz-range-thumb:hover {
         max-width: 90px;
         height: auto;
     }
+
 
 
     .header-nav-block {
